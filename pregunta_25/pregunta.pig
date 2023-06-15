@@ -19,4 +19,13 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+tbl = LOAD 'data.csv' USING PigStorage(',')
+        AS(col1:INT,
+           col2:charArray,
+           col3:charArray,
+           col4:charArray,
+           col5:charArray,
+           col6:INT);
 
+tbl = FOREACH tbl GENERATE INDEXOF(col2, 'a');
+STORE tbl INTO 'output' USING PigStorage(',');
